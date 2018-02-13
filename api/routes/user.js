@@ -1,7 +1,8 @@
 var express = require('express'),
     router = express.Router(),
     bodyParser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    userHandler = require('../controllers/userController');
 
 mongoose.connect('mongodb://localhost/pokedex');
 
@@ -13,70 +14,22 @@ router.use(function(req, res, next) {
     next();
 });
 
-const User = mongoose.model('user');
+const User = mongoose.model('users');
 
 router.route('/users')
-// POST
-    .post(function(req, res) {
-        const user = new User();
-        user.name = req.body.name;
-        user.email = req.body.email;
-        user.password = req.body.password;
-
-        user.save(function(err) {
-            if (err)
-                res.send(err);
-            res.json({message: 'User successfully created'});
-        });
-    })
-
-    // GET ALL
-    .get(function(req, res) {
-        User.find(function(err, users) {
-            if (err)
-                res.send(err);
-            res.json(users);
-        });
-    });
+    .post(userHandler.newUser)
+    .get(userHandler.listAll);
 
 
 router.route('/users/:id')
-// GET USER
-    .get(function(req, res) {
-        User.findById(req.params.id, function(err, user) {
-            if (err)
-                res.send(err);
-            res.json(user);
-        });
-    })
+    .get(userHandler.getUser)
+    .put(userHandler.updateUser)
+    .delete(userHandler.deleteUser);
 
-    // UPDATE USER
-    .put(function(req, res) {
-        User.findById(req.params.id, function(err, user) {
-            if (err)
-                res.send(err);
-            user.name = req.body.name;
-            user.email = req.body.email;
-            user.password = req.body.password;
+router.route('/auth/register')
+    .post(userHandler.register);
 
-            user.save(function(err) {
-                if (err)
-                    res.send(err);
-                res.json({message: 'User successfully updated'});
-            });
-        });
-    })
-
-    // DELETE POKEMON
-    .delete(function(req, res) {
-        User.remove({
-            _id: req.params.id
-        }, function(err, user) {
-            if (err)
-                res.send(err);
-
-            res.json({ message: 'PokemonType successfully deleted' });
-        });
-    });
+router.route('/auth/sign_in')
+    .post(userHandler.sign_in);
 
 module.exports = router;

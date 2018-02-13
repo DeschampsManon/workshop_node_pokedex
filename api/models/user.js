@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema,
-      pokemonSchema = require('../models/pokemon');
+      bcrypt = require('bcrypt'),
+      Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: {
@@ -13,9 +13,13 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: 'Password'
+        required: 'Password is required'
     },
     pokemons: [{type:mongoose.Schema.Types.ObjectId, ref: 'pokemon'}]
 });
+
+userSchema.methods.comparePassword = function(pass){
+    return bcrypt.compareSync(pass, this.password)
+};
 
 module.exports = mongoose.model('users', userSchema);
