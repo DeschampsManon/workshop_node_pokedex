@@ -16,7 +16,7 @@ router.use(function(req, res, next) {
 const Pokemon = mongoose.model('pokemons');
 
 router.route('/pokemons')
-    // POST
+    // POST /pokemons créer un pokemon
     .post(function(req, res) {
         const pokemon = new Pokemon();
         pokemon.name = req.body.name;
@@ -33,7 +33,7 @@ router.route('/pokemons')
 
     })
 
-    // GET ALL
+    // GET /pokemons liste tous les pokemons
     .get(function(req, res) {
         Pokemon.find(function(err, pokemons) {
             if (err)
@@ -44,7 +44,7 @@ router.route('/pokemons')
 
 
 router.route('/pokemons/:id')
-    // GET POKEMON
+    // GET /pokemons/:id récupéré un pokemon
     .get(function(req, res) {
         Pokemon.findById(req.params.id, function(err, pokemon) {
             if (err)
@@ -53,7 +53,7 @@ router.route('/pokemons/:id')
         });
     })
 
-    // UPDATE POKEMON
+    // PUT /pokemons/:id modifie tous le user
     .put(function(req, res) {
         Pokemon.findById(req.params.id, function(err, pokemon) {
             if (err)
@@ -73,7 +73,7 @@ router.route('/pokemons/:id')
         });
     })
 
-    // DELETE POKEMON
+    // DELETE /pokemons/:id supprime le pokemon
     .delete(function(req, res) {
         Pokemon.remove({
             _id: req.params.pokemon_id
