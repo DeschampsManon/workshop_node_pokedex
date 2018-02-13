@@ -1,7 +1,6 @@
 var express = require('express'),
-    pokemon = require('../models/pokemon'),
     router = express.Router(),
-    mongoose   = require('mongoose');
+    mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/pokedex');
 
@@ -10,10 +9,12 @@ router.use(function(req, res, next) {
     next();
 });
 
+const Pokemon = mongoose.model('pokemons');
+
 router.route('/pokemons')
     // POST
     .post(function(req, res) {
-        var pokemon = new Pokemon();
+        const pokemon = new Pokemon();
         pokemon.name = req.body.name;
         pokemon.type = req.body.type;
         pokemon.level = req.body.level;

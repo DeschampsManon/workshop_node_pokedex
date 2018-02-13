@@ -7,7 +7,7 @@ const pokemonSchema = new Schema({
         type: String,
         required: 'Name is required'
     },
-    type: [pokemonTypeSchema],
+    type: {type: mongoose.Schema.Types.ObjectId,  ref: 'pokemonType'},
     level: {
         type: Number
     },
