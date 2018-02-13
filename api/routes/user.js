@@ -1,8 +1,12 @@
 var express = require('express'),
     router = express.Router(),
+    bodyParser = require('body-parser'),
     mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/pokedex');
+
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
 router.use(function(req, res, next) {
     console.log('There is a request');
