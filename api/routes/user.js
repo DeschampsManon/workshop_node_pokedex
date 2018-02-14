@@ -30,4 +30,10 @@ router.route('/auth/register')
 router.route('/auth/sign_in')
     .post(userHandler.sign_in);
 
+router.route('/users/:id/pokemons')
+    .get(userHandler.getAllPokemonsForUser);
+
+router.route('/users/:id_user/pokemons/:id_pokemon')
+    .get(userHandler.addPokemonToUser);
+
 module.exports = router;

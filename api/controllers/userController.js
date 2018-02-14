@@ -2,6 +2,8 @@ const mongoose = require('mongoose'),
     jwt = require('jsonwebtoken'),
     bcrypt = require('bcrypt'),
     User = mongoose.model('users');
+    PokemonUser = mongoose.model('pokemonUser');
+    Pokemon = mongoose.model('pokemons');
 
 exports.register = function(req, res){
     var newUser = new User(req.body);
@@ -96,5 +98,35 @@ exports.deleteUser = function(req, res) {
             res.send(err);
 
         res.json({ message: 'User successfully deleted' });
+    });
+};
+
+exports.getAllPokemonsForUser = function(req, res){
+    PokemonUser.find({user: req.params.id}, function(err, pokemonUser) {
+        if (err)
+            res.send(err);
+        res.json(pokemonUser);
+    });
+};
+
+exports.addPokemonToUser = function(req, res){
+    const pokemonUser = new PokemonUser();
+
+    Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
+        if (err)
+            res.send(err);
+        pokemonUser._pokemon = pokemon._id;
+    });
+
+    User.findById(req.params.id_user, function(err, user) {
+        if (err)
+            res.send(err);
+        pokemonUser._user = user._id;
+    });
+
+    pokemonUser.save(function(err) {
+        if (err)
+            res.send(err);
+        res.json({message: 'Pokemon successfully added to user'});
     });
 };

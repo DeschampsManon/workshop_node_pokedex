@@ -7,7 +7,7 @@ const express = require('express'),
     cheerio = require('cheerio'),
     fetch = require('node-fetch'),
     router = require('./api/routes/router.js');
-changeCase = require('change-case');
+    changeCase = require('change-case');
 
 mongoose.connect('mongodb://localhost/pokedex');
 

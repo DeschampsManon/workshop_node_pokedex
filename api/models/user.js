@@ -14,8 +14,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: 'Password is required'
-    },
-    pokemons: [{type:mongoose.Schema.Types.ObjectId, ref: 'pokemon'}]
+    }
+    //pokemons: [{type:mongoose.Schema.Types.ObjectId, ref: 'pokemon'}]
 });
 
 userSchema.methods.comparePassword = function(pass){
