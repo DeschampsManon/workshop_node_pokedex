@@ -14,6 +14,10 @@ const pokemonSchema = new Schema({
     img: {
         type: String
     },
+    generation: {
+        type: Number,
+        required: 'Generation is required'
+    },
     evolution: {
         niveauEvolution : {
             type: Number
