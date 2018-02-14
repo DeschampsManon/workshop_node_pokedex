@@ -14,11 +14,9 @@ router.use(function(req, res, next) {
     next();
 });
 
-const User = mongoose.model('users');
-
 router.route('/users')
-    .post(userHandler.newUser)
-    .get(userHandler.listAll);
+    .post(userHandler.loginRequired, userHandler.newUser)
+    .get(userHandler.loginRequired, userHandler.listAll);
 
 
 router.route('/users/:id')
