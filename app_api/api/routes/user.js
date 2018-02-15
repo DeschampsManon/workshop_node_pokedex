@@ -22,6 +22,7 @@ router.route('/users')
 router.route('/users/:id')
     .get(userHandler.getUser)
     .put(userHandler.updateUser)
+    .patch(userHandler.patchUser)
     .delete(userHandler.deleteUser);
 
 router.route('/auth/register')

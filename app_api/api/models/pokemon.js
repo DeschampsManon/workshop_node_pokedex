@@ -1,16 +1,25 @@
 const mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    uniqueValidator = require('mongoose-unique-validator');
 
 const pokemonSchema = new Schema({
     //_id: Number,
     name: {
         type: String,
-        required: 'Name is required'
+        required: 'Name is required',
+        unique: true
     },
-    type: {type: mongoose.Schema.Types.ObjectId,  ref: 'pokemonType'},
+    type: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'pokemonType'
+    },
     img: {
         type: String,
         required: 'Image is required'
+    },
+    level: {
+        type: Number,
+        required: 'Level is required'
     },
     generation: {
         type: Number,
@@ -27,5 +36,7 @@ const pokemonSchema = new Schema({
         }
     }
 });
+
+pokemonSchema.plugin(uniqueValidator, {message: "This pokemon already exist"});
 
 module.exports = mongoose.model('pokemons', pokemonSchema);

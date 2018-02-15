@@ -24,6 +24,7 @@
     "express": "^4.16.2",
     "jsonwebtoken": "^8.1.1",
     "mongoose": "^5.0.5",
+    "mongoose-unique-validator": "^2.0.0",
     "node-fetch": "^2.0.0",
     "nodemon": "^1.14.12"
   }

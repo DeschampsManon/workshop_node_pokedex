@@ -26,7 +26,7 @@ router.route('/pokemons/:id')
     // GET /pokemons/:id récupéré un pokemon
     .get(pokemonHandler.showPokemon)
 
-    // PUT /pokemons/:id modifie tous le user
+    // PUT /pokemons/:id modifie le pokemon
     .put(pokemonHandler.updatePokemon)
 
     // DELETE /pokemons/:id supprime le pokemon

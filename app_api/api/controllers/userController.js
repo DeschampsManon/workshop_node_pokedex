@@ -102,15 +102,20 @@ exports.deleteUser = function(req, res) {
 };
 
 exports.getAllPokemonsForUser = function(req, res){
-    PokemonUser.find({user: req.params.id}, function(err, pokemonUser) {
+    /*PokemonUser.find({user: req.params.id}, function(err, pokemonUser) {
         if (err)
             res.send(err);
         res.json(pokemonUser);
-    }).populate('pokemon');
+    }).populate('pokemons');*/
+    User.findById(req.params.id, function(err, user) {
+        if (err)
+            res.send(err);
+        res.json(user);
+    }).populate('pokemons');
 };
 
 exports.addPokemonToUser = function(req, res){
-    Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
+    /*Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
         if (err)
             res.send(err);
         User.findById(req.params.id_user, function(err, user) {
@@ -129,6 +134,20 @@ exports.addPokemonToUser = function(req, res){
                 res.json({message: 'Pokemon successfully added to user'});
             });
         });
+    });*/
+    User.findById(req.params.id_user, function(err, user) {
+        if (err)
+            res.send(err);
+        Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
+            if (err)
+                res.send(err);
+            user.pokemons.push(pokemon._id);
+            user.save(function(err){
+                if(err)
+                    res.send(err);
+                res.json({message: 'Pokemon ' + pokemon.name + ' successfully added to user ' + user.name})
+            })
+        });
     });
 };
 
@@ -141,13 +160,33 @@ exports.getOnePokemonForUser = function(req, res){
 };
 
 exports.deleteUserPokemon = function(req, res){
-    PokemonUser.remove({
+    User.findById(req.params.id_user, function(err, user) {
+        if (err)
+            res.send(err);
+        const index = user.pokemons.indexOf(req.params.id_pokemon);
+        user.pokemons.splice(index, 1);
+        user.save(function(err){
+            if(err)
+                res.send(err);
+            res.json({message: 'Pokemon successfully removed from user ' + user.name})
+        });
+    });
+    /*PokemonUser.remove({
         user: req.params.id_user,
-        pokemon: req.params.id_pokemon
+        pokemon : req.params.id_pokemon
     }, function(err, pokemonUser) {
         if (err)
             res.send(err);
 
         res.json({ message: 'Pokemon was deleted from user' });
+    });*/
+};
+
+exports.patchUser = function(req, res){
+    User.findByIdAndUpdate(req.params.id_user, function(err, user) {
+        if (err)
+            res.send(err);
+        user.update({_id  : ObjectId(req.params.id)}, {$set: req.body});
+        res.json({ message: 'User was patching' });
     });
 };
