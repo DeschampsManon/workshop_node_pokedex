@@ -1,6 +1,6 @@
 <%- contentFor('body') %>
-    <% for (pokemon of pokemons) { %>
-        <section class="clearfix">
+    <% pokemons.forEach(function(pokemon, index) { %>
+        <section class="clearfix pokemon-card">
             <article class="pokemon-data">
                 <h2><%= pokemon.name %></h2>
                 <ul class="nav nav-tabs nav-justified pokemon-health">
@@ -58,7 +58,27 @@
                             #<%= pokemon.number %>
                         <% } %>
                     </h3>
+                    <nav>
+                        <ul class="pokemons-pagination">
+                            <div>
+                                <% if (index != 0) { %>
+                                    <li>
+                                        <a href="#!" class="btn-paginate">
+                                            <i class="material-icons">keyboard_arrow_up</i>
+                                        </a>
+                                    </li>
+                                <% } %>
+                                <% if ( pokemons.length - 1 != index) { %>
+                                    <li>
+                                        <a href="#!" class="btn-paginate">
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </a>
+                                    </li>
+                                <% } %>
+                            </div>
+                        </ul>
+                    </nav>
                 </div>
             </article>
         </section>
-    <% } %>
+    <% }) %>

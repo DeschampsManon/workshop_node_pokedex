@@ -119,6 +119,7 @@ h2 {
 }
 
 .pokemon-thumbnail {
+    position:relative;
     width: calc(100% - 550px);
     width: -webkit-calc(100% - 550px);
     width: -moz-calc(100% - 550px);
@@ -143,4 +144,36 @@ h2 {
     font-weight: 300;
     padding-top: 18vh;
     color: #464646;
+}
+
+.pokemon-thumbnail .pokemons-pagination {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    padding: 0 80px;
+    display: flex;
+}
+
+.pokemon-thumbnail .pokemons-pagination > div {
+    margin: auto;
+}
+
+.pokemon-thumbnail .pokemons-pagination .btn-paginate {
+    color: #fff !important;
+    opacity: .8;
+    margin: 15vh 0;
+}
+
+.pokemon-thumbnail .pokemons-pagination .btn-paginate:hover {
+    color: #fff !important;
+    opacity: 1;
+}
+
+.pokemon-thumbnail .pokemons-pagination .btn-paginate > i {
+    font-size: 45px;
+    height: 50px;
+    width: 50px;
+    border: 3px solid #fff;
+    border-radius: 50%;
 }
