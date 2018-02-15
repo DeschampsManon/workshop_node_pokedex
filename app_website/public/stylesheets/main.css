@@ -1,0 +1,131 @@
+body {
+    background-color: #262661;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Montserrat';
+    color: #818181;
+}
+
+a,
+img {
+    display: block;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+a:hover {
+    text-decoration: none!important;
+    color: #53C4C6 !important;
+}
+
+h2 {
+    font-family: 'Playfair Display';
+    font-size: 50px;
+    color: #464646;
+}
+
+.pokemon-data {
+    background-color: #fff;
+    padding: 20vh 40px 0 40px;
+    float: left;
+    width: 550px;
+    height: 100vh;
+    overflow: auto;
+}
+
+.pokemon-thumbnail {
+    background-color: blue;
+    background-repeat: no-repeat;
+    background-size: 55%;
+    background-position: center center;
+    height: 100vh;
+    width: calc(100% - 550px);
+    width: -webkit-calc(100% - 550px);
+    width: -moz-calc(100% - 550px);
+    float: left;
+}
+
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+#main-header ul {
+    display: flex;
+    padding: 40px 40px 0 40px;
+}
+
+#main-header ul > li {
+    float: left;
+    display: block;
+    margin: auto 0;
+}
+
+#main-header ul > li > a {
+    color: #464646;
+    padding-right: 20px;
+    font-size: 12px;
+}
+
+#main-header ul > li h1 {
+    float: left;
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 9.5px 0 9.5px 10px;
+}
+
+#main-header ul > li #logo {
+    float: left;
+    width: 34.5px;
+}
+
+.pokemon-health {
+    border-bottom: 1px solid #eee !important;
+    padding-bottom: 15px;
+    padding-top: 25px;
+}
+
+.pokemon-health li {
+    text-align: center;
+    border-right: 1px solid #eee;
+}
+
+.pokemon-health li:last-child {
+    border-right: 0 solid transparent;
+}
+
+.pokemon-health li span {
+    font-weight: 300;
+    font-size: 10px;
+}
+
+.pokemon-health li h4 {
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.pokemon-attacks {
+    padding: 20px 0 15px 0;
+    border-bottom: 1px solid #eee !important;
+}
+
+.pokemon-attacks li {
+    padding: 12px 0;
+}
+
+.pokemon-attacks li h4{
+    margin: 0;
+    color: #464646;
+}
+
+.pokemon-attacks li > div:last-child {
+    padding: 9px 0px;
+}
