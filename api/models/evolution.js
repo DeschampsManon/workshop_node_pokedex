@@ -6,7 +6,7 @@ const evolutionSchema = new Schema({
     name: {
         type: String,
         required: 'Name is required'
-    }
+    },
     level: {
         type: Number
     }

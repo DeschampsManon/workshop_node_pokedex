@@ -2,7 +2,7 @@ const mongoose = require('mongoose'),
     jwt = require('jsonwebtoken'),
     bcrypt = require('bcrypt'),
     User = mongoose.model('users');
-    PokemonUser = mongoose.model('pokemonUser');
+    PokemonUser = mongoose.model('pokemonUsers');
     Pokemon = mongoose.model('pokemons');
 
 exports.register = function(req, res){
@@ -106,27 +106,48 @@ exports.getAllPokemonsForUser = function(req, res){
         if (err)
             res.send(err);
         res.json(pokemonUser);
-    });
+    }).populate('pokemon');
 };
 
 exports.addPokemonToUser = function(req, res){
-    const pokemonUser = new PokemonUser();
-
     Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
         if (err)
             res.send(err);
-        pokemonUser._pokemon = pokemon._id;
-    });
+        User.findById(req.params.id_user, function(err, user) {
+            if (err)
+                res.send(err);
 
-    User.findById(req.params.id_user, function(err, user) {
+            const pokemonUser = new PokemonUser({
+                user: user._id,
+                pokemon: pokemon._id
+            });
+
+            res.send(pokemonUser);
+            pokemonUser.save(function(err) {
+                if (err)
+                    res.send(err);
+                res.json({message: 'Pokemon successfully added to user'});
+            });
+        });
+    });
+};
+
+exports.getOnePokemonForUser = function(req, res){
+    Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
         if (err)
             res.send(err);
-        pokemonUser._user = user._id;
+        res.send(pokemon);
     });
+};
 
-    pokemonUser.save(function(err) {
+exports.deleteUserPokemon = function(req, res){
+    PokemonUser.remove({
+        user: req.params.id_user,
+        pokemon: req.params.id_pokemon
+    }, function(err, pokemonUser) {
         if (err)
             res.send(err);
-        res.json({message: 'Pokemon successfully added to user'});
+
+        res.json({ message: 'Pokemon was deleted from user' });
     });
 };

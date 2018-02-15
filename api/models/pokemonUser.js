@@ -3,8 +3,8 @@ const mongoose = require('mongoose'),
 
 const pokemonUserSchema = new Schema({
     //_id: Number,
-    user_id: [{type:mongoose.Schema.Types.ObjectId, ref: 'users', required: 'User is required'}],
-    pokemon_id: [{type:mongoose.Schema.Types.ObjectId, ref: 'pokemons', required: 'Pokemon is required'}]
+    user: [{type:mongoose.Schema.Types.ObjectId, ref: 'users', required: 'User is required'}],
+    pokemon: [{type:mongoose.Schema.Types.ObjectId, ref: 'pokemons', required: 'Pokemon is required'}]
 });
 
 module.exports = mongoose.model('pokemonUsers', pokemonUserSchema);

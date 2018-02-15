@@ -31,9 +31,11 @@ router.route('/auth/sign_in')
     .post(userHandler.sign_in);
 
 router.route('/users/:id/pokemons')
-    .get(userHandler.getAllPokemonsForUser);
+    .get(userHandler.loginRequired, userHandler.getAllPokemonsForUser);
 
 router.route('/users/:id_user/pokemons/:id_pokemon')
-    .get(userHandler.addPokemonToUser);
+    .post(userHandler.loginRequired, userHandler.addPokemonToUser)
+    .get(userHandler.loginRequired, userHandler.getOnePokemonForUser)
+    .delete(userHandler.loginRequired, userHandler.deleteUserPokemon);
 
 module.exports = router;
