@@ -10,7 +10,7 @@ const pokemonSchema = new Schema({
         unique: true
     },
     types: {
-       type: String
+       type: Array
     },
     level: {
         type: Number,

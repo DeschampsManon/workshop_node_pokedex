@@ -12,11 +12,11 @@ router.get('/', function(req, res) {
             pokemons = response.data;
             res.render(
                 'pages/home',
-                { pokemons: pokemons }
+                {
+                    title: 'Home',
+                    pokemons: pokemons
+                }
             )
-        })
-        .catch(function(error) {
-            console.log('ERROR :' + error);
         });
 });
 

@@ -1,0 +1,13 @@
+body {
+    background-color: red;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+#app-container {
+    background-color: blue;
+    height: 50px;
+    width: 50px;
+    margin: auto;
+}

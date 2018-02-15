@@ -2,22 +2,19 @@
     <html lang="fr">
         <head>
             <meta charset="UTF-8">
-            <title>My Node Site</title>
+            <title><%= title %></title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-            <link rel="stylesheet" href="/css/styles.css">
+            <link rel="stylesheet" href="/stylesheets/main.css">
         </head>
     <body>
-    <header>
-        <nav>
-           <a href="/">Home</a></li>
-            <a href="/about">About</a>
-        </nav>
-    </header>
-<main>
-    <div class="container">
+    <section id="app-container">
+        <header>
+            <nav>
+                <a href="/">Home</a></li>
+                <a href="/about">About</a>
+            </nav>
+        </header>
         <%- body %>
-    </div>
-</main>
-
+    </section>
 </body>
 </html>
