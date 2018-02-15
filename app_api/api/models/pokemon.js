@@ -7,7 +7,7 @@ const pokemonSchema = new Schema({
     name: {
         type: String,
         required: 'Name is required',
-        unique: true
+        //unique: true
     },
     types: {
        type: Array
@@ -21,7 +21,7 @@ const pokemonSchema = new Schema({
         required: 'Image is required'
     },
     number: {
-        type: Number,
+        type: String,
         required: 'Number is required'
     },
     weight: {

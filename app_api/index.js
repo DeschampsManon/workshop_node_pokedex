@@ -11,7 +11,7 @@ const express = require('express'),
 	fetch = require('node-fetch'),
 	router = require('./api/routes/router.js'),
 	changeCase = require('change-case'),
-	pokemons = require('pokemon_data.json');
+	pokemons = require('./pokemon_data.json');
 
 mongoose.connect('mongodb://localhost/pokedex');
 const conn = mongoose.connection;

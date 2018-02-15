@@ -52,4 +52,12 @@ exports.deletePokemon = function(req, res) {
 
         res.json({ message: 'Pokemon successfully deleted' });
     });
-}
+};
+
+exports.showPokemonByNumber = function(req, res){
+    Pokemon.find({number: req.params.number}, function(err, pokemon){
+        if (err)
+            res.send(err);
+        res.json(pokemon);
+    })
+};

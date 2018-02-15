@@ -21,7 +21,6 @@ router.route('/pokemons')
     // GET /pokemons liste tous les pokemons
     .get(pokemonHandler.listAllPokemons);
 
-
 router.route('/pokemons/:id')
     // GET /pokemons/:id récupéré un pokemon
     .get(pokemonHandler.showPokemon)
@@ -31,5 +30,8 @@ router.route('/pokemons/:id')
 
     // DELETE /pokemons/:id supprime le pokemon
     .delete(pokemonHandler.deletePokemon);
+
+router.route('/pokemon/:number')
+    .get(pokemonHandler.showPokemonByNumber);
 
 module.exports = router;
