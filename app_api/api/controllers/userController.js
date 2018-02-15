@@ -2,8 +2,8 @@ const mongoose = require('mongoose'),
     jwt = require('jsonwebtoken'),
     bcrypt = require('bcrypt'),
     User = mongoose.model('users');
-    PokemonUser = mongoose.model('pokemonUsers');
-    Pokemon = mongoose.model('pokemons');
+PokemonUser = mongoose.model('pokemonUsers');
+Pokemon = mongoose.model('pokemons');
 
 exports.register = function(req, res){
     var newUser = new User(req.body);
@@ -119,10 +119,10 @@ exports.addPokemonToUser = function(req, res){
 
             const pokemonUser = new PokemonUser({
                 user: user._id,
-                pokemon: pokemon._id
+                pokemon: pokemon._id,
+                level: req.body.level
             });
 
-            res.send(pokemonUser);
             pokemonUser.save(function(err) {
                 if (err)
                     res.send(err);

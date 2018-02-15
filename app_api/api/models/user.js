@@ -1,6 +1,6 @@
 const mongoose = require('mongoose'),
-      bcrypt = require('bcrypt'),
-      Schema = mongoose.Schema;
+    bcrypt = require('bcrypt'),
+    Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     name: {
@@ -9,7 +9,9 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        required: 'Email is required'
+        required: 'Email is required',
+        unique: true,
+        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
     },
     password: {
         type: String,

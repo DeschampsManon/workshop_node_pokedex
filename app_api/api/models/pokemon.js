@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 const pokemonSchema = new Schema({
     //_id: Number,
@@ -8,10 +8,6 @@ const pokemonSchema = new Schema({
         required: 'Name is required'
     },
     type: {type: mongoose.Schema.Types.ObjectId,  ref: 'pokemonType'},
-    level: {
-        type: Number,
-        required: 'Level is required'
-    },
     img: {
         type: String,
         required: 'Image is required'
