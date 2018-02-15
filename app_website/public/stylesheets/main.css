@@ -19,7 +19,7 @@ ul {
 
 a:hover {
     text-decoration: none!important;
-    color: #53C4C6 !important;
+    color: #FC0025 !important;
 }
 
 h2 {
@@ -35,18 +35,6 @@ h2 {
     width: 550px;
     height: 100vh;
     overflow: auto;
-}
-
-.pokemon-thumbnail {
-    background-color: blue;
-    background-repeat: no-repeat;
-    background-size: 55%;
-    background-position: center center;
-    height: 100vh;
-    width: calc(100% - 550px);
-    width: -webkit-calc(100% - 550px);
-    width: -moz-calc(100% - 550px);
-    float: left;
 }
 
 #main-header {
@@ -128,4 +116,31 @@ h2 {
 
 .pokemon-attacks li > div:last-child {
     padding: 9px 0px;
+}
+
+.pokemon-thumbnail {
+    width: calc(100% - 550px);
+    width: -webkit-calc(100% - 550px);
+    width: -moz-calc(100% - 550px);
+    float: left;
+    display: block;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pokemon-thumbnail > div {
+    background-repeat: no-repeat;
+    background-size: 55%;
+    background-position: center center;
+    height: 100vh;
+}
+
+.pokemon-thumbnail h3 {
+    text-align: center;
+    margin: 0;
+    font-size: 60px;
+    font-weight: 300;
+    padding-top: 18vh;
+    color: #464646;
 }

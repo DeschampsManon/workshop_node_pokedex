@@ -6,9 +6,12 @@
                 <ul class="nav nav-tabs nav-justified pokemon-health">
                     <li>
                         <h4>
-                            <% for (type of pokemon.types) { %>
+                            <% pokemon.types.forEach(function(type, index) { %>
                                 <%= type %>
-                            <% } %>
+                                <% if ( pokemon.types.length - 1 != index) { %>
+                                    /
+                                <% } %>
+                            <% }) %>
                         </h4>
                         <span>Type</span>
                     </li>
@@ -44,16 +47,18 @@
                     <% } %>
                 </ul>
             </article>
-            <article class="pokemon-thumbnail" style="background-image: url(' <%= pokemon.img %>')">
-                <h3>
-                    <% if (pokemon.number < 10) { %>
-                        #00<%= pokemon.number %>
-                    <% } else if (pokemon.number < 100) { %>
-                        #0<%= pokemon.number %>
-                    <% } else { %>
-                        #<%= pokemon.number %>
-                    <% } %>
-                </h3>
+            <article class="pokemon-thumbnail" style="background-image: url('/images/<%= pokemon.types[0].toLowerCase() %>_background.jpg')">
+                <div style="background-image: url(' <%= pokemon.img %>')">
+                    <h3>
+                        <% if (pokemon.number < 10) { %>
+                            #00<%= pokemon.number %>
+                        <% } else if (pokemon.number < 100) { %>
+                            #0<%= pokemon.number %>
+                        <% } else { %>
+                            #<%= pokemon.number %>
+                        <% } %>
+                    </h3>
+                </div>
             </article>
         </section>
     <% } %>
