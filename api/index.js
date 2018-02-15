@@ -4,12 +4,12 @@ const express = require('express'),
 	app = express(),
 	port = process.env.PORT || 3000,
 	mongoose = require('mongoose'),
-	models = require('./api/models'),
+	models = require('./models/index'),
 	ObjectID = require('mongodb').ObjectID,
 	jsonwebtoken = require('jsonwebtoken'),
 	cheerio = require('cheerio'),
 	fetch = require('node-fetch'),
-	router = require('./api/routes/router.js'),
+	router = require('./routes/router.js'),
 	changeCase = require('change-case');
 
 mongoose.connect('mongodb://localhost/pokedex');
