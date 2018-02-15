@@ -7,4 +7,4 @@ const pokemonUserSchema = new Schema({
     pokemon_id: [{type:mongoose.Schema.Types.ObjectId, ref: 'pokemons', required: 'Pokemon is required'}]
 });
 
-module.exports = mongoose.model('pokemonUser', pokemonUserSchema);
+module.exports = mongoose.model('pokemonUsers', pokemonUserSchema);
