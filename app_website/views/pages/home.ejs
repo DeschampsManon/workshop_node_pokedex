@@ -1,84 +1,78 @@
 <%- contentFor('body') %>
-    <% pokemons.forEach(function(pokemon, index) { %>
-        <section class="clearfix pokemon-card">
-            <article class="pokemon-data">
-                <h2><%= pokemon.name %></h2>
-                <ul class="nav nav-tabs nav-justified pokemon-health">
-                    <li>
-                        <h4>
-                            <% pokemon.types.forEach(function(type, index) { %>
-                                <%= type %>
-                                <% if ( pokemon.types.length - 1 != index) { %>
-                                    /
-                                <% } %>
-                            <% }) %>
-                        </h4>
-                        <span>Type</span>
-                    </li>
-                    <li>
-                        <h4> <%=  pokemon.weight %></h4>
-                        <span>Weight</span>
-                    </li>
-                    <li>
-                        <h4> <%=  pokemon.height %></h4>
-                        <span>Height</span>
-                    </li>
-                </ul>
-                <ul class="pokemon-attacks">
-                    <% for (attack of pokemon.attacks) { %>
-                        <li class="clearfix">
-                            <div class="pull-left">
-                                <h4>
-                                    <%= attack.name %>
-                                </h4>
-                                <span>
-                                    <%= attack.type %>
-                                </span>
-                            </div>
-                            <div class="pull-right">
-                                <%= attack.damage %>
-                            </div>
+    <ul id="pokemons-list">
+        <% pokemons.forEach(function(pokemon, index) { %>
+            <li class="clearfix pokemon-card">
+                <article class="pokemon-data">
+                    <h2><%= pokemon.name %></h2>
+                    <ul class="nav nav-tabs nav-justified pokemon-health">
+                        <li>
+                            <h4>
+                                <% pokemon.types.forEach(function(type, index) { %>
+                                    <%= type %>
+                                    <% if ( pokemon.types.length - 1 != index) { %>
+                                        /
+                                    <% } %>
+                                <% }) %>
+                            </h4>
+                            <span>Type</span>
                         </li>
-                    <% } %>
-                </ul>
-                <ul class="pokemon-evolutions">
-                    <% for (previous_evolution of pokemon.previous_evolution) { %>
-                        <%= previous_evolution %>
-                    <% } %>
-                </ul>
-            </article>
-            <article class="pokemon-thumbnail" style="background-image: url('/images/<%= pokemon.types[0].toLowerCase() %>_background.jpg')">
-                <div style="background-image: url(' <%= pokemon.img %>')">
-                    <h3>
-                        <% if (pokemon.number < 10) { %>
-                            #00<%= pokemon.number %>
-                        <% } else if (pokemon.number < 100) { %>
-                            #0<%= pokemon.number %>
-                        <% } else { %>
-                            #<%= pokemon.number %>
+                        <li>
+                            <h4> <%=  pokemon.weight %></h4>
+                            <span>Weight</span>
+                        </li>
+                        <li>
+                            <h4> <%=  pokemon.height %></h4>
+                            <span>Height</span>
+                        </li>
+                    </ul>
+                    <ul class="pokemon-attacks">
+                        <% for (attack of pokemon.attacks) { %>
+                            <li class="clearfix">
+                                <div class="pull-left">
+                                    <h4>
+                                        <%= attack.name %>
+                                    </h4>
+                                    <span>
+                                        <%= attack.type %>
+                                    </span>
+                                </div>
+                                <div class="pull-right">
+                                    <%= attack.damage %>
+                                </div>
+                            </li>
                         <% } %>
-                    </h3>
-                    <nav>
-                        <ul class="pokemons-pagination">
-                            <div>
-                                <% if (index != 0) { %>
-                                    <li>
-                                        <a href="#!" class="btn-paginate">
-                                            <i class="material-icons">keyboard_arrow_up</i>
-                                        </a>
-                                    </li>
-                                <% } %>
-                                <% if ( pokemons.length - 1 != index) { %>
-                                    <li>
-                                        <a href="#!" class="btn-paginate">
-                                            <i class="material-icons">keyboard_arrow_down</i>
-                                        </a>
-                                    </li>
-                                <% } %>
-                            </div>
-                        </ul>
-                    </nav>
-                </div>
-            </article>
-        </section>
-    <% }) %>
+                    </ul>
+                    <ul class="pokemon-evolutions">
+                        <% for (previous_evolution of pokemon.previous_evolution) { %>
+                            <%= previous_evolution %>
+                        <% } %>
+                    </ul>
+                </article>
+                <article class="pokemon-thumbnail" style="background-image: url('/images/grass_background.jpg')">
+                    <div style="background-image: url(' <%= pokemon.img %>')">
+                        <h3>#<%= pokemon.number %></h3>
+                        <nav>
+                            <ul class="pokemons-pagination">
+                                <div>
+                                    <% if ( pokemons.length - 1 != index) { %>
+                                        <li>
+                                            <a href="#!" class="btn-paginate previous">
+                                                <i class="material-icons">keyboard_arrow_up</i>
+                                            </a>
+                                        </li>
+                                    <% } %>
+                                    <% if (index != 0) { %>
+                                        <li>
+                                            <a href="#!" class="btn-paginate next">
+                                                <i class="material-icons">keyboard_arrow_down</i>
+                                            </a>
+                                        </li>
+                                    <% } %>
+                                </div>
+                            </ul>
+                        </nav>
+                    </div>
+                </article>
+            </li>
+        <% }) %>
+    </ul>
