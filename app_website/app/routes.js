@@ -17,6 +17,8 @@ router.get('/', function(req, res) {
                     pokemons: pokemons
                 }
             )
+        }).catch(function (error) {
+            console.log(error);
         });
 });
 

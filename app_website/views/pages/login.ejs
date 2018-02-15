@@ -1,22 +1,29 @@
 <%- contentFor('body') %>
-<section class="clearfix pokemon-card">
-    <article class="pokemon-data">
-        <h1>Login</h1>
-        <% if (typeof message !== 'undefined') { %>
-            <%= message %>
-        <% } %>
-        <form method="post" action="/login">
-            <p>
-                <label>Email :</label>
-                <input type="text" name="email" required>
-            </p>
-            <p>
-                <label>Password :</label>
-                <input type="password" name="password" required>
-            </p>
-            <p>
-                <input type="submit" value="Login">
-            </p>
-        </form>
-    </article>
-</section>
+    <section class="clearfix pokemon-card">
+        <article class="pokemon-data" style="overflow: visible;">
+            <h2>Login</h2>
+            <% if (typeof message !== 'undefined') { %>
+                <%= message %>
+            <% } %>
+            <form method="post" action="/login">
+                <div class="row">
+                    <div class="col-md-12 input-box">
+                        <i class="material-icons">email</i>
+                        <input type="text" name="email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 input-box">
+                        <i class="material-icons">lock</i>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="submit-box">
+                    <input type="submit" value="Login">
+                </div>
+            </form>
+        </article>
+        <article class="pokemon-thumbnail" style="background-color: #262661;">
+
+        </article>
+    </section>

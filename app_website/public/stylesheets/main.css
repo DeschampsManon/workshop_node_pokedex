@@ -1,5 +1,5 @@
 body {
-    background-color: #262661;
+    background-color: #fff;
     font-family: 'Montserrat';
     color: #818181;
     position: relative;
@@ -10,6 +10,17 @@ body {
 a,
 img {
     display: block;
+}
+
+form {
+    position: relative;
+}
+
+input.form-control:focus,
+input.form-control:active {
+    outline: none !important;
+    box-shadow: none;
+    border-color: #464646;
 }
 
 ul {
@@ -137,13 +148,13 @@ h2 {
     overflow: hidden;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
 }
 
 .pokemon-thumbnail > div {
     background-repeat: no-repeat;
     background-size: 55%;
     background-position: center center;
-    height: 100vh;
 }
 
 .pokemon-thumbnail h3 {
@@ -185,4 +196,59 @@ h2 {
     width: 50px;
     border: 3px solid #fff;
     border-radius: 50%;
+}
+
+.input-box {
+    position: relative;
+    margin-top: 15px;
+}
+
+.input-box > i {
+    position: absolute;
+    top: 6px;
+    left: 21px;
+    opacity: .4;
+}
+
+.form-control {
+    border-radius: 0;
+    border-color: #ddd;
+    padding-left: 35px;
+}
+
+.submit-box {
+    position: relative;
+    z-index: 400;
+    width: calc(100% + 80px);
+    width: -moz-calc(100% + 80px);
+    width: -webkit-calc(100% + 80px);
+}
+
+.submit-box:after {
+    font-family: 'Material Icons';
+    content: 'keyboard_arrow_right';
+    position: absolute;
+    right: 15px;
+    top: 45px;
+    font-size: 24px;
+    opacity: .6;
+}
+
+.submit-box > input {
+    position: absolute;
+    left: 0;
+    bottom: -86px;
+    font-weight: 300;
+    width: 100%;
+    text-align: left;
+    padding: 15px 20px;
+    border-color: #ddd;
+    border-left: 2px solid #FC0025;
+    background: #fff;
+    box-shadow: none;
+    border-radius: 0;
+    -webkit-box-shadow: 3px 21px 109px 0px rgba(0,0,0,0.28);
+    -moz-box-shadow: 3px 21px 109px 0px rgba(0,0,0,0.28);
+    box-shadow: 3px 21px 109px 0px rgba(0,0,0,0.28);
+    -webkit-appearance: none;
 }

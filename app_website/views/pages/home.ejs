@@ -1,7 +1,7 @@
 <%- contentFor('body') %>
     <ul id="pokemons-list">
         <% pokemons.forEach(function(pokemon, index) { %>
-            <li class="clearfix pokemon-card">
+            <li class="clearfix">
                 <article class="pokemon-data">
                     <h2><%= pokemon.name %></h2>
                     <ul class="nav nav-tabs nav-justified pokemon-health">
@@ -43,8 +43,9 @@
                         <% } %>
                     </ul>
                     <ul class="pokemon-evolutions">
-                        <% for (previous_evolution of pokemon.previous_evolution) { %>
-                            <%= previous_evolution %>
+                        <%- include previous_evolutions.ejs %>
+                        <% for (previous_evolution of pokemon.previous_evolutions) { %>
+                            <%= previous_evolution.name %>
                         <% } %>
                     </ul>
                 </article>
