@@ -7,6 +7,7 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
             <link rel="stylesheet" href="/stylesheets/main.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         </head>
     <body>
     <section>
@@ -29,6 +30,14 @@
             </nav>
         </header>
         <%- body %>
+        <script>
+            $('.btn-paginate').click(function (e) {
+                e.preventDefault();
+                $('#pokemons-list').animate({
+                    top: $(this).hasClass('previous') ? '-=100vh' : '+=100vh',
+                }, 400);
+            });
+        </script>
     </section>
 </body>
 </html>
