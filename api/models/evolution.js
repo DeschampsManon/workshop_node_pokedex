@@ -7,8 +7,8 @@ const evolutionSchema = new Schema({
         type: String,
         required: 'Name is required'
     },
-    level: {
-        type: Number
+    condition: {
+        type: String
     }
 });
 
