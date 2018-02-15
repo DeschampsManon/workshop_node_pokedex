@@ -25,6 +25,14 @@
                     <li>
                         <a href="/about">About</a>
                     </li>
+                    <li>
+                        <% if (typeof user == 'undefined') { %>
+                            <a href="/login">Login</a>
+                            <a href="/register">Register</a>
+                        <% } else { %>
+                            <a href="/users/:id"><%= user.user.name %></a>
+                        <% } %>
+                    </li>
                 </ul>
             </nav>
         </header>

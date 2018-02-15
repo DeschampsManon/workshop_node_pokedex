@@ -31,7 +31,7 @@ exports.sign_in = function(req, res){
             if (!user.comparePassword(req.body.password)) {
                 res.status(401).json({ message: 'Authentication failed. Wrong password.' });
             } else {
-                return res.json({token: jwt.sign({ email: user.email, name: user.name, _id: user._id}, 'RESTFULAPIs')});
+                return res.json({token: jwt.sign({ email: user.email, name: user.name, _id: user._id}, 'RESTFULAPIs'), user: user});
             }
         }
     });

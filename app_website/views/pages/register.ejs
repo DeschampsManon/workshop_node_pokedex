@@ -1,0 +1,26 @@
+<%- contentFor('body') %>
+<section class="clearfix pokemon-card">
+    <article class="pokemon-data">
+        <h1>Register</h1>
+        <% if (typeof message !== 'undefined') { %>
+            <%= message %>
+        <% } %>
+        <form method="post" action="/register">
+            <p>
+                <label>Name :</label>
+                <input type="text" name="name" required>
+            </p>
+            <p>
+                <label>Email :</label>
+                <input type="text" name="email" required>
+            </p>
+            <p>
+                <label>Password :</label>
+                <input type="password" name="password" required>
+            </p>
+            <p>
+                <input type="submit" value="Register">
+            </p>
+        </form>
+    </article>
+</section>
