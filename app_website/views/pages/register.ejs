@@ -1,26 +1,33 @@
 <%- contentFor('body') %>
     <section class="clearfix pokemon-card">
-        <article class="pokemon-data">
-            <h1>Register</h1>
+        <article class="pokemon-data" style="overflow: visible;">
+            <h2>Register</h2>
             <% if (typeof message !== 'undefined') { %>
-            <%= message %>
+                <%= message %>
             <% } %>
             <form method="post" action="/register">
-                <p>
-                    <label>Name :</label>
-                    <input type="text" name="name" required>
-                </p>
-                <p>
-                    <label>Email :</label>
-                    <input type="text" name="email" required>
-                </p>
-                <p>
-                    <label>Password :</label>
-                    <input type="password" name="password" required>
-                </p>
-                <p>
+                <div class="row">
+                    <div class="col-md-12 input-box">
+                        <i class="material-icons">face</i>
+                        <input type="text" name="name" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 input-box">
+                        <i class="material-icons">email</i>
+                        <input type="text" name="email" class="form-control" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 input-box">
+                        <i class="material-icons">lock</i>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+                <div class="submit-box">
                     <input type="submit" value="Register">
-                </p>
+                </div>
             </form>
         </article>
+        <article class="pokemon-thumbnail" style="background-color: #262661;"></article>
     </section>

@@ -155,6 +155,7 @@ h2 {
     background-repeat: no-repeat;
     background-size: 55%;
     background-position: center center;
+    height: 100vh;
 }
 
 .pokemon-thumbnail h3 {
