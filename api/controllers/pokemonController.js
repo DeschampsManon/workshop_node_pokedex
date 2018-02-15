@@ -3,12 +3,6 @@ const mongoose = require('mongoose'),
 
 exports.newPokemon = function(req, res) {
     const pokemon = new Pokemon(req.body);
-    /*pokemon.name = req.body.name;
-    pokemon.type = req.body.type;
-    pokemon.level = req.body.level;
-    pokemon.img = req.body.img;
-    pokemon.evolution = req.body.evolution;*/
-
     pokemon.save(function(err) {
         if (err)
             res.send(err);
@@ -37,10 +31,8 @@ exports.updatePokemon = function(req, res) {
         if (err)
             res.send(err);
         pokemon.name = req.body.name;
-        pokemon.type = req.body.type;
         pokemon.level = req.body.level;
         pokemon.img = req.body.img;
-        pokemon.evolution = req.body.evolution;
 
         pokemon.save(function(err) {
             if (err)

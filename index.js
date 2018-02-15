@@ -30,7 +30,7 @@ app.use(function(req, res, next){
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router.pokemon_router);
-app.use('/api', router.pokemonType_router);
+app.use('/api', router.type_router);
 app.use('/api', router.user_router);
 
 app.listen(port);
@@ -50,13 +50,13 @@ fetch("http://www.pokepedia.fr/Type")
     });
     typelistjson = []
     typelist.forEach(function(value){
-        models.pokemonType.findOne({'name': value}, function(error, object) {
+        models.type.findOne({name: value}, function(error, object) {
             if(!object){
                 const type = {
                     _id: new ObjectID(),
                     name: value,
                 };
-                conn.collection('pokemontypes').insert(type)
+                conn.collection('types').insert(type)
             }
         });
     });
@@ -76,11 +76,16 @@ fetch("http://www.pokemontrash.com/pokedex/liste-pokemon.php")
             let img_relative = $(element).find('td').eq(1).find('img').attr('src');
             let img = 'http://www.pokemontrash.com/pokedex/' + img_relative;
             let name = $(element).find('td').eq(2).find('a').text();
+            let types = []
+            $(element).find('td').eq(4).find('span').each((index, element) => {
+                types.push(changeCase.lowerCase($(element).text()));
+            });
             pokelist.push({
                 id: id,
                 name: name,
                 img: img,
                 generation: generation,
+                type: types
             });
         });
     });
@@ -88,15 +93,37 @@ fetch("http://www.pokemontrash.com/pokedex/liste-pokemon.php")
         return a.id - b.id;
     });
     pokelist.forEach(function(value){
-        models.pokemonType.findOne({'name': value.name}, function(error, object) {
+        models.pokemon.findOne({name: value.name}, function(error, object) {
             if(!object){
-               const type = {
+                const pokemon = {
                     _id: new ObjectID(),
                     name: value.name,
                     img: value.img,
                     generation: value.generation
                 };
-                conn.collection('pokemons').insert(type)
+                var pokemon_id, type_id;
+                conn.collection('pokemons').insert(pokemon, function (error, result) {
+                    result.ops.forEach(function(value) {
+                        pokemon_id = value._id
+                    })
+                    value.type.forEach(function(value) {
+                        models.type.findOne({name: value}, function(error, object) {
+                            if (object) {
+                                type_id = object._ids
+                                models.pokemonType.findOne({pokemon_id: pokemon_id, type_id: type_id}, function(error, object) {
+                                    if (!object) {
+                                        const pokemon_type = {
+                                            _id: new ObjectID(),
+                                            pokemon: pokemon_id,
+                                            type: type_id,
+                                        };
+                                        conn.collection('pokemontypes').insert(pokemon_type)
+                                    }
+                                });
+                            }
+                        });
+                    });
+                });
             }
         });
     });

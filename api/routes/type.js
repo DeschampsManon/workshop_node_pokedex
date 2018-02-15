@@ -13,65 +13,65 @@ router.use(function(req, res, next) {
     next();
 });
 
-const PokemonType = mongoose.model('pokemonTypes');
-const pokemonType = new PokemonType();
+const Type = mongoose.model('pokemonTypes');
+const type = new Type();
 
-router.route('/pokemonsType')
+router.route('/types')
 // POST
     .post(function(req, res) {
-        pokemonType.name = req.body.name;
+        type.name = req.body.name;
 
-        pokemonType.save(function(err) {
+        type.save(function(err) {
             if (err)
                 res.send(err);
-            res.json({message: 'PokemonType successfully created'});
+            res.json({message: 'Type successfully created'});
         });
     })
 
     // GET ALL
     .get(function(req, res) {
-        PokemonType.find(function(err, pokemonTypes) {
+        Type.find(function(err, types) {
             if (err)
                 res.send(err);
-            res.json(pokemonTypes);
+            res.json(types);
         });
     });
 
 
-router.route('/pokemonsType/:id')
-// GET POKEMONTYPE
+router.route('/type/:id')
+// GET TYPE
     .get(function(req, res) {
-        PokemonType.findById(req.params.id, function(err, pokemonType) {
+        Type.findById(req.params.id, function(err, type) {
             if (err)
                 res.send(err);
-            res.json(pokemonType);
+            res.json(type);
         });
     })
 
     // UPDATE POKEMONTYPE
     .put(function(req, res) {
-        PokemonType.findById(req.params.id, function(err, pokemonType) {
+        Type.findById(req.params.id, function(err, type) {
             if (err)
                 res.send(err);
-            pokemonType.name = req.body.name;
+            type.name = req.body.name;
 
-            pokemonType.save(function(err) {
+            type.save(function(err) {
                 if (err)
                     res.send(err);
-                res.json({message: 'PokemonType successfully updated'});
+                res.json({message: 'Type successfully updated'});
             });
         });
     })
 
     // DELETE POKEMON
     .delete(function(req, res) {
-        PokemonType.remove({
+        Type.remove({
             _id: req.params.id
-        }, function(err, pokemonType) {
+        }, function(err, type) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'PokemonType successfully deleted' });
+            res.json({ message: 'Type successfully deleted' });
         });
     });
 
