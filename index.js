@@ -42,9 +42,9 @@ fetch("http://www.pokepedia.fr/Liste_des_Pok%C3%A9mon_par_famille_d%27%C3%A9volu
 .then(res => res.text())
 .then(html => cheerio.load(html))
 .then($ => {
-    const evolutionlist = [];
-    $("table.tableaustandard").each((index, element) => {
+    $("table.tableaustandard.centre").each((index, element) => {
         $(element).find('tr').each((index, element) => {
+            const evolutionlist = [];
             let evolution1 = $(element).find('td').first().find('a').text();
             let condition1 = null
             let evolution2 = $(element).find('td').eq(2).find('a').text();
@@ -59,10 +59,48 @@ fetch("http://www.pokepedia.fr/Liste_des_Pok%C3%A9mon_par_famille_d%27%C3%A9volu
                 evolution3: evolution3,
                 condition3: condition3
             });
+            //console.log(evolutionlist)
+            evolutionlist.forEach(function(value){
+                if (evolution1 && evolution1!= undefined && evolution1 != '') {
+                    models.evolution.findOne({name: value.evolution1}, function(error, object) {
+                        if (!object) {
+                            const evolution1 = {
+                                _id: new ObjectID(),
+                                name: value.evolution1,
+                                condition: value.condition1,
+                            };
+                            conn.collection('evolutions').insert(evolution1)
+                        }
+                    });
+                }
+                if (evolution2 && evolution2!= undefined && evolution2 != '') {
+                    models.evolution.findOne({name: value.evolution2}, function (error, object) {
+                        if (!object) {
+                            const evolution2 = {
+                                _id: new ObjectID(),
+                                name: value.evolution2,
+                                condition: value.condition2,
+                            };
+                            conn.collection('evolutions').insert(evolution2)
+                        }
+                    })
+                }
+                if (evolution3 && evolution3!= undefined && evolution3 != '') {
+                    models.evolution.findOne({name: value.evolution2}, function (error, object) {
+                        if (!object) {
+                            const evolution3 = {
+                                _id: new ObjectID(),
+                                name: value.evolution3,
+                                condition: value.condition3,
+                            };
+                            conn.collection('evolutions').insert(evolution3)
+                        }
+                    });
+                }
+
+            });
         });
     });
-    console.log(evolutionlist)
-    //return typelist;
 })
 .catch(err => console.log(err));
 
@@ -78,7 +116,6 @@ fetch("http://www.pokepedia.fr/Type")
             typelist.push(type);
         }
     });
-    typelistjson = []
     typelist.forEach(function(value){
         models.type.findOne({name: value}, function(error, object) {
             if(!object){
@@ -90,7 +127,6 @@ fetch("http://www.pokepedia.fr/Type")
             }
         });
     });
-    return typelist;
 })
 .catch(err => console.log(err));
 
@@ -130,23 +166,25 @@ fetch("http://www.pokemontrash.com/pokedex/liste-pokemon.php")
                     _id: new ObjectID(),
                     name: value.name,
                     img: value.img,
-                    generation: value.generation
+                    generation: value.generation,
+                    level: 0
                 };
-                var pokemon_id, type_id;
+                var pokemon_id, pokemon_name, type_id, evolution_id;
                 conn.collection('pokemons').insert(pokemon, function (error, result) {
                     result.ops.forEach(function(value) {
                         pokemon_id = value._id
+                        pokemon_name = value.name
                     })
                     value.type.forEach(function(value) {
                         models.type.findOne({name: value}, function(error, object) {
                             if (object) {
-                                type_id = object._ids
+                                type_id = object._id
                                 models.pokemonType.findOne({pokemon_id: pokemon_id, type_id: type_id}, function(error, object) {
                                     if (!object) {
                                         const pokemon_type = {
                                             _id: new ObjectID(),
-                                            pokemon: pokemon_id,
-                                            type: type_id,
+                                            pokemon_id: pokemon_id,
+                                            type_id: type_id,
                                         };
                                         conn.collection('pokemontypes').insert(pokemon_type)
                                     }
@@ -154,10 +192,24 @@ fetch("http://www.pokemontrash.com/pokedex/liste-pokemon.php")
                             }
                         });
                     });
+                    models.evolution.findOne({name: pokemon_name}, function(error, object) {
+                        if (object) {
+                            evolution_id = object._id
+                            models.pokemonEvolution.findOne({pokemon_id: pokemon_id, evolution_id: evolution_id}, function(error, object) {
+                                if (!object) {
+                                    const pokemon_evolution = {
+                                        _id: new ObjectID(),
+                                        pokemon_id: pokemon_id,
+                                        evolution_id: evolution_id,
+                                    };
+                                    conn.collection('pokemonevolutions').insert(pokemon_evolution)
+                                }
+                            });
+                        }
+                    });
                 });
             }
         });
     });
-    return pokelist;
 })
 .catch(err => console.log(err));
