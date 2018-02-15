@@ -40,18 +40,29 @@ pokemons.forEach(function(key, value) {
 	let number = key.Number;
 	let name = key.Name;
 	let types = key.Types;
-	let previous_evolution = [];
-    let next_evolution = [];
+    let weight = key.Weight.Minimum;
+    let height = key.Height.Minimum;
+	let previous_evolutions = [];
+    let next_evolutions = [];
+    let attacks = [];
 	let level = 0
     let img = 'https://raw.githubusercontent.com/fanzeyi/Pokemon-DB/master/img/'+ number + name + '.png';
     if (key.PreviousEvolution && key.PreviousEvolution != 'undefined') {
         key.PreviousEvolution.forEach(function (value) {
-            previous_evolution.push(value.Name)
+            previous_evolutions.push(value.Number)
         });
     }
     if (key.NextEvolution && key.NextEvolution != 'undefined') {
         key.NextEvolution.forEach(function(value) {
-            next_evolution.push(value.Name)
+            next_evolutions.push(value.Number)
+        });
+    }
+    if (key.FastAttack && key.FastAttack != 'undefined') {
+        key.FastAttack.forEach(function(value) {
+            attacks.push({ 'name': value.Name,
+                           'type': value.Type,
+                           'damage': value.Damage
+                        })
         });
     }
     models.pokemon.findOne({number: number}, function(error, object) {
@@ -61,9 +72,13 @@ pokemons.forEach(function(key, value) {
                 name: name,
                 img: img,
                 types: types,
-                previous_evolution: previous_evolution,
-                next_evolution: next_evolution,
-                level: level
+                previous_evolutions: previous_evolutions,
+                next_evolutions: next_evolutions,
+                level: level,
+                number: number,
+                weight: weight,
+                height: height,
+                attacks: attacks
             };
             conn.collection('pokemons').insert(pokemon);
         }

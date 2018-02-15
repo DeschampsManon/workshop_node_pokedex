@@ -3,15 +3,28 @@
         <head>
             <meta charset="UTF-8">
             <title><%= title %></title>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Playfair+Display:400,900" rel="stylesheet">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
             <link rel="stylesheet" href="/stylesheets/main.css">
         </head>
     <body>
-    <section id="app-container">
-        <header>
+    <section>
+        <header id="main-header">
             <nav>
-                <a href="/">Home</a></li>
-                <a href="/about">About</a>
+                <ul class="clearfix">
+                    <li>
+                        <a href="/">
+                            <img src="/images/logo.png" id="logo">
+                            <h1>My pokedex</h1>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/">Home</a></li>
+                    </li>
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                </ul>
             </nav>
         </header>
         <%- body %>

@@ -20,11 +20,24 @@ const pokemonSchema = new Schema({
         type: String,
         required: 'Image is required'
     },
-    previous_evolution: {
+    number: {
+        type: Number,
+        required: 'Number is required'
+    },
+    weight: {
         type: String
     },
-    next_evolution: {
+    height: {
         type: String
+    },
+    previous_evolution: {
+        type: Array
+    },
+    next_evolution: {
+        type: Array
+    },
+    attacks: {
+        type: Array
     }
 });
 

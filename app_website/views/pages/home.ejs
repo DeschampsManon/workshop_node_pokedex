@@ -1,10 +1,59 @@
 <%- contentFor('body') %>
-    <div class="row">
-        <% for (pokemon of pokemons) { %>
-            <h2><%= pokemon.name %></h2>
-            <img src="<%= pokemon.img %>">
-            <% for (type of pokemon.types) { %>
-                <span class="type-<%= type %>"><%= type %>%></span>
-            <% } %>
-        <% } %>
-    </div>
+    <% for (pokemon of pokemons) { %>
+        <section class="clearfix">
+            <article class="pokemon-data">
+                <h2><%= pokemon.name %></h2>
+                <ul class="nav nav-tabs nav-justified pokemon-health">
+                    <li>
+                        <h4>
+                            <% for (type of pokemon.types) { %>
+                                <%= type %>
+                            <% } %>
+                        </h4>
+                        <span>Type</span>
+                    </li>
+                    <li>
+                        <h4> <%=  pokemon.weight %></h4>
+                        <span>Weight</span>
+                    </li>
+                    <li>
+                        <h4> <%=  pokemon.height %></h4>
+                        <span>Height</span>
+                    </li>
+                </ul>
+                <ul class="pokemon-attacks">
+                    <% for (attack of pokemon.attacks) { %>
+                        <li class="clearfix">
+                            <div class="pull-left">
+                                <h4>
+                                    <%= attack.name %>
+                                </h4>
+                                <span>
+                                    <%= attack.type %>
+                                </span>
+                            </div>
+                            <div class="pull-right">
+                                <%= attack.damage %>
+                            </div>
+                        </li>
+                    <% } %>
+                </ul>
+                <ul class="pokemon-evolutions">
+                    <% for (previous_evolution of pokemon.previous_evolution) { %>
+                        <%= previous_evolution %>
+                    <% } %>
+                </ul>
+            </article>
+            <article class="pokemon-thumbnail" style="background-image: url(' <%= pokemon.img %>')">
+                <h3>
+                    <% if (pokemon.number < 10) { %>
+                        #00<%= pokemon.number %>
+                    <% } else if (pokemon.number < 100) { %>
+                        #0<%= pokemon.number %>
+                    <% } else { %>
+                        #<%= pokemon.number %>
+                    <% } %>
+                </h3>
+            </article>
+        </section>
+    <% } %>
