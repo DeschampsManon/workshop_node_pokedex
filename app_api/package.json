@@ -1,0 +1,29 @@
+{
+  "name": "workshop_node_pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DeschampsManon/workshop_node_pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DeschampsManon/workshop_node_pokedex/issues"
+  },
+  "homepage": "https://github.com/DeschampsManon/workshop_node_pokedex#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "change-case": "^3.0.1",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1",
+    "mongoose": "^5.0.5",
+    "node-fetch": "^2.0.0",
+    "nodemon": "^1.14.12"
+  }
+}
