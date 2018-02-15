@@ -7,8 +7,8 @@ const express = require('express'),
     jsonwebtoken = require('jsonwebtoken'),
     cheerio = require('cheerio'),
     fetch = require('node-fetch'),
-    router = require('./api/routes/router.js');
-    changeCase = require('change-case');
+    router = require('./api/routes/router.js'),
+    changeCase = require('change-case'),
     request = require('request');
 
 mongoose.connect('mongodb://localhost/pokedex');
@@ -37,12 +37,42 @@ app.listen(port);
 
 console.log('todo list RESTful API server started on: ' + port);
 
+// EVOLUTIONS SCRAPPER
+fetch("http://www.pokepedia.fr/Liste_des_Pok%C3%A9mon_par_famille_d%27%C3%A9volution")
+.then(res => res.text())
+.then(html => cheerio.load(html))
+.then($ => {
+    const evolutionlist = [];
+    $("table.tableaustandard").each((index, element) => {
+        $(element).find('tr').each((index, element) => {
+            let evolution1 = $(element).find('td').first().find('a').text();
+            let condition1 = null
+            let evolution2 = $(element).find('td').eq(2).find('a').text();
+            let condition2 = $(element).find('td').eq(1).text();
+            let evolution3 = $(element).find('td').eq(4).find('a').text();
+            let condition3 = $(element).find('td').eq(3).text();
+            evolutionlist.push({
+                evolution1: evolution1,
+                condition1: condition1,
+                evolution2: evolution2,
+                condition2: condition2,
+                evolution3: evolution3,
+                condition3: condition3
+            });
+        });
+    });
+    console.log(evolutionlist)
+    //return typelist;
+})
+.catch(err => console.log(err));
+
+// TYPES SCRAPPER
 fetch("http://www.pokepedia.fr/Type")
-    .then(res => res.text())
-    .then(html => cheerio.load(html))
-    .then($ => {
-        const typelist = [];
-        $("table.tableaustandard td").each((index, element) => {
+.then(res => res.text())
+.then(html => cheerio.load(html))
+.then($ => {
+    const typelist = [];
+    $("table.tableaustandard td").each((index, element) => {
         let type = changeCase.lowerCase($(element).find('img').attr('alt'));
         if (type && type != undefined && type != 'inconnu' && typelist.indexOf(type) <= -1) {
             typelist.push(type);
@@ -64,6 +94,7 @@ fetch("http://www.pokepedia.fr/Type")
 })
 .catch(err => console.log(err));
 
+// POKEMONS SCRAPPER
 fetch("http://www.pokemontrash.com/pokedex/liste-pokemon.php")
 .then(res => res.text())
 .then(html => cheerio.load(html))
