@@ -1,0 +1,9 @@
+<%- contentFor('body') %>
+    <div class="row">
+        <% for (pokemon of pokemons) { %>
+
+            <h2><%= pokemon.name %></h2>
+            <img src="<%= pokemon.img %>">
+
+        <% } %>
+    </div>

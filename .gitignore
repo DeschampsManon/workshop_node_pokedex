@@ -1,3 +1,8 @@
 .idea/
 app_api/node_modules/
+<<<<<<< HEAD
 app_website/node_modules
+=======
+app_website/node_modules/
+
+>>>>>>> change tables organization

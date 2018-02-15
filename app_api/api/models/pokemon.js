@@ -9,31 +9,22 @@ const pokemonSchema = new Schema({
         required: 'Name is required',
         unique: true
     },
-    type: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'pokemonType'
-    },
-    img: {
-        type: String,
-        required: 'Image is required'
+    types: {
+       type: String
     },
     level: {
         type: Number,
         required: 'Level is required'
     },
-    generation: {
-        type: Number,
-        required: 'Generation is required'
+    img: {
+        type: String,
+        required: 'Image is required'
     },
-    evolution: {
-        niveauEvolution : {
-            type: Number,
-            required: "Evolution level is required"
-        },
-        evolutionName : {
-            type: String,
-            required: "Evolution name is required"
-        }
+    previous_evolution: {
+        type: String
+    },
+    next_evolution: {
+        type: String
     }
 });
 
