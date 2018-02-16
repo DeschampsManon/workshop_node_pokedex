@@ -2,9 +2,12 @@
 const express = require('express'),
       expressLayouts = require('express-ejs-layouts'),
       bodyParser = require('body-parser'),
+      cookieParser = require('cookie-parser'),
       app = express(),
       port = process.env.PORT || 5000;
 
+
+app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 app.use(bodyParser.urlencoded({ extended: true }));

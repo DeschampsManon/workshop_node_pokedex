@@ -102,14 +102,8 @@ exports.deleteUser = function(req, res) {
 };
 
 exports.getAllPokemonsForUser = function(req, res){
-    /*PokemonUser.find({user: req.params.id}, function(err, pokemonUser) {
-        if (err)
-            res.send(err);
-        res.json(pokemonUser);
-    }).populate('pokemons');*/
     User.findById(req.params.id, function(err, user) {
-        if (err)
-            res.send(err);
+        if (err) res.send(err);
         res.json(user);
     }).populate('pokemons');
 };

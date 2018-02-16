@@ -30,9 +30,9 @@ exports.updatePokemon = function(req, res) {
     Pokemon.findById(req.params.id, function(err, pokemon) {
         if (err)
             res.send(err);
-        pokemon.name = req.body.name;
+        //pokemon.name = req.body.name;
         pokemon.level = req.body.level;
-        pokemon.img = req.body.img;
+        //pokemon.img = req.body.img;
 
         pokemon.save(function(err) {
             if (err)

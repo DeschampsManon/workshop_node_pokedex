@@ -28,9 +28,15 @@
                             <a href="/register">Register</a>
                         </li>
                     <% } else { %>
-                        <li>
-                            <a href="/users/:id"><%= user.user.name %></a>
-                        </li>
+                        <% if (typeof user.user == 'undefined') { %>
+                            <li>
+                                <a href="/users/<%= user._id %>"><%= user.name %></a>
+                            </li>
+                        <% } else { %>
+                            <li>
+                                <a href="/users/<%= user.user._id %>"><%= user.user.name %></a>
+                            </li>
+                        <% } %>
                     <% } %>
                 </ul>
             </nav>

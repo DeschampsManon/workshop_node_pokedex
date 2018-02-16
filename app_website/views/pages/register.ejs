@@ -3,7 +3,11 @@
         <article class="pokemon-data" style="overflow: visible;">
             <h2>Register</h2>
             <% if (typeof message !== 'undefined') { %>
-                <%= message %>
+                <% if (typeof message == 'object') { %>
+                    <%- JSON.stringify(message.errors.email.message) %>
+                <% } else { %>
+                    <%= message %>
+                <% } %>
             <% } %>
             <form method="post" action="/register">
                 <div class="row">

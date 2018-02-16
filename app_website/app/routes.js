@@ -3,8 +3,7 @@ const express = require('express'),
       axios = require('axios'),
       router = express.Router(),
       request = require("request");
-
-module.exports = router;
+      module.exports = router;
 
 router.get('/', function(req, res) {
     var pokemons;
@@ -38,6 +37,7 @@ router.post('/login', function(req, res){
     })
     .then(function(response) {
         var user = response.data;
+        res.cookie('auth',user.token);
         axios.get('http://localhost:3000/api/pokemons')
             .then(function(response) {
                 pokemons = response.data;
@@ -74,16 +74,19 @@ router.post('/register', function(req, res){
         password: req.body.password
     })
     .then(function(response) {
-        var user = response.data;
-            res.render(
-                'pages/home',
-                {
-                    title: 'Home',
-                    user: user,
-                    pokemons: pokemons
-                }
-            )
-        })
+        axios.get('http://localhost:3000/api/pokemons')
+            .then(function (response) {
+                pokemons = response.data;
+                res.render(
+                    'pages/home',
+                    {
+                        title: 'Home',
+                        message: "User created",
+                        pokemons: pokemons
+                    }
+                )
+            })
+    })
     .catch(function (error) {
         res.render(
             'pages/register',
@@ -92,8 +95,33 @@ router.post('/register', function(req, res){
                 message: error.response.data.message
             }
         );
-        console.log(error);
     });
+});
+
+router.get('/users/:id', function(req, res) {
+    var user;
+    var token = req.cookies.auth;
+    axios.get('http://localhost:3000/api/users/' + req.params.id)
+        .then(function() {
+            axios.get('http://localhost:3000/api/users/' + req.params.id +'/pokemons', {
+                headers: {'Authorization': "JWT " + token}
+            })
+            .then(function(response) {
+                user = response.data;
+                res.render(
+                    'pages/account',
+                    {
+                        title: 'Account',
+                        user: user
+                    }
+                )
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        }).catch(function (error) {
+            console.log(error);
+        });
 });
 
 
