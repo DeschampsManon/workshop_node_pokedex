@@ -15,7 +15,7 @@ exports.listAllPokemons = function(req, res) {
         if (err)
             res.send(err);
         res.json(pokemons);
-    });
+    }).sort( { number: 1 });
 };
 
 exports.showPokemon = function(req, res) {
