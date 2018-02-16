@@ -6,8 +6,8 @@ const pokemonSchema = new Schema({
     //_id: Number,
     name: {
         type: String,
-        required: 'Name is required',
-        //unique: true
+        required: 'Name is required'/*,
+        unique: true*/
     },
     types: {
        type: Array

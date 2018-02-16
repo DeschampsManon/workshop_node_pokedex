@@ -124,8 +124,6 @@ router.get('/users/:id', function(req, res) {
         });
 });
 
-
-
 //router.get('/contact', function(req, res) {
     //res.render('pages/contact');
 //});
