@@ -42,10 +42,20 @@
                             </li>
                         <% } %>
                     </ul>
-                    <ul class="pokemon-evolutions">
-                        <%- include previous_evolutions.ejs %>
+                    <ul class="nav nav-tabs nav-justified pokemon-evolutions">
                         <% for (previous_evolution of pokemon.previous_evolutions) { %>
-                            <%= previous_evolution.name %>
+                            <li data-id="<%= previous_evolution %>">
+                            </li>
+                        <% } %>
+                        <li>
+                            <div>
+                                <img src="<%= pokemon.img %>">
+                                <h5><%= pokemon.name %></h5>
+                            </div>
+                        </li>
+                        <% for (next_evolution of pokemon.next_evolutions) { %>
+                            <li data-id="<%= next_evolution %>">
+                            </li>
                         <% } %>
                     </ul>
                 </article>

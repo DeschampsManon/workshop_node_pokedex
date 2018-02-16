@@ -253,3 +253,38 @@ h2 {
     box-shadow: 3px 21px 109px 0px rgba(0,0,0,0.28);
     -webkit-appearance: none;
 }
+
+.pokemon-evolutions {
+    display: block;
+    overflow: hidden;
+    padding-top: 50px;
+}
+
+.pokemon-evolutions > li > div {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border: 8px solid #eee;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.pokemon-evolutions > li > div > img {
+    position: absolute;
+    width: 111%;
+    bottom: -7px;
+    left: 0px;
+}
+
+.pokemon-evolutions > li > div > h5 {
+    background-color: #464646;
+    opacity: .8;
+    position: absolute;
+    bottom: 0;
+    left: -10%;
+    width: 120%;
+    text-align: center;
+    padding: 5px 0;
+    color: #fff;
+    font-weight: 400;
+}

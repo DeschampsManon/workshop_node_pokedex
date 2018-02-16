@@ -1,7 +1,8 @@
 const express = require('express'),
       path = require('path'),
       axios = require('axios'),
-      router = express.Router();
+      router = express.Router(),
+      request = require("request");
 
 module.exports = router;
 
@@ -22,10 +23,13 @@ router.get('/', function(req, res) {
         });
 });
 
-router.get('/login', function(req, res) {
+router.get('/previous_evolutions/', function(req, res) {
     res.render('pages/login', {title:"Login"});
 });
 
+router.get('/login', function(req, res) {
+    res.render('pages/login', {title:"Login"});
+});
 
 router.post('/login', function(req, res){
     axios.post('http://localhost:3000/api/auth/sign_in', {
@@ -34,7 +38,6 @@ router.post('/login', function(req, res){
     })
     .then(function(response) {
         var user = response.data;
-        console.log(user);
         axios.get('http://localhost:3000/api/pokemons')
             .then(function(response) {
                 pokemons = response.data;

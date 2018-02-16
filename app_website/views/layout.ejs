@@ -43,6 +43,25 @@
                     top: $(this).hasClass('previous') ? '-=100vh' : '+=100vh',
                 }, 400);
             });
+
+            $('.pokemon-evolutions > li').each(function () {
+                var $element = $(this)
+                var id = $element.data('id');
+                console.log()
+                if (id < 10) {
+                    id = '00' + id;
+                } else if (id < 100) {
+                    id = '0' + id;
+                }
+
+                $.get('http://localhost:3000/api/pokemon/' + id , function( data ) {
+                    if (data[0]) {
+                        console.log(data[0].name)
+                        console.log(data[0].img)
+                        $element.html('<div> <img src="'+ data[0].img + '"><h5>' + data[0].name + '</h5></div>');
+                    }
+                });
+            })
         </script>
     </section>
 </body>
