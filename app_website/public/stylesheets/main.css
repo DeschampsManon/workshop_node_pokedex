@@ -288,3 +288,9 @@ h2 {
     color: #fff;
     font-weight: 400;
 }
+
+.form-thumbnail {
+    background-repeat: no-repeat !important;
+    transform: rotate(180deg);
+    background-size: cover !important;
+}
