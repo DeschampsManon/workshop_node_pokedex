@@ -2,8 +2,7 @@ const mongoose = require('mongoose'),
     jwt = require('jsonwebtoken'),
     bcrypt = require('bcrypt'),
     User = mongoose.model('users');
-PokemonUser = mongoose.model('pokemonUsers');
-Pokemon = mongoose.model('pokemons');
+    Pokemon = mongoose.model('pokemons');
 
 exports.register = function(req, res){
     var newUser = new User(req.body);
@@ -109,26 +108,6 @@ exports.getAllPokemonsForUser = function(req, res){
 };
 
 exports.addPokemonToUser = function(req, res){
-    /*Pokemon.findById(req.params.id_pokemon, function(err, pokemon) {
-        if (err)
-            res.send(err);
-        User.findById(req.params.id_user, function(err, user) {
-            if (err)
-                res.send(err);
-
-            const pokemonUser = new PokemonUser({
-                user: user._id,
-                pokemon: pokemon._id,
-                level: req.body.level
-            });
-
-            pokemonUser.save(function(err) {
-                if (err)
-                    res.send(err);
-                res.json({message: 'Pokemon successfully added to user'});
-            });
-        });
-    });*/
     User.findById(req.params.id_user, function(err, user) {
         if (err)
             res.send(err);
@@ -165,15 +144,6 @@ exports.deleteUserPokemon = function(req, res){
             res.json({message: 'Pokemon successfully removed from user ' + user.name})
         });
     });
-    /*PokemonUser.remove({
-        user: req.params.id_user,
-        pokemon : req.params.id_pokemon
-    }, function(err, pokemonUser) {
-        if (err)
-            res.send(err);
-
-        res.json({ message: 'Pokemon was deleted from user' });
-    });*/
 };
 
 exports.patchUser = function(req, res){
